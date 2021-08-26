@@ -7,7 +7,8 @@ const connectDB=require('./config/db');
 const router = require('./routes');
 const passport=require('passport');
 const session=require('express-session');
-
+const MongoStore=require('connect-mongo')(session);
+const mongoose =require('mongoose');
 
 dotenv.config({path:"./config/config.env"});
 
@@ -39,6 +40,11 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false,
+    // store: MongoStore.create({
+    //     mongoUrl: mongoose.connection
+    // },function(err){
+    //     console.log(err||"MongoStore is Working proprly");
+    // })
    
   }));
 
