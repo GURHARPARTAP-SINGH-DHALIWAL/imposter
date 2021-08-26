@@ -40,11 +40,7 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false,
-    // store: MongoStore.create({
-    //     mongoUrl: mongoose.connection
-    // },function(err){
-    //     console.log(err||"MongoStore is Working proprly");
-    // })
+    store:new MongoStore({mongooseConnection:mongoose.connection})
    
   }));
 
