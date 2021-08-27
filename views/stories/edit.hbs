@@ -1,7 +1,9 @@
 <h3>Edit Post</h3>
 
 <div class="row">
-    <form action="/stories" method="POST" class="col s12">
+    <form action="/stories/{{story._id}}" method="POST" class="col s12">
+    {{!-- This hidden element is used for method override package to get _method from request.body and set it to value --}}
+       <input type="hidden" name="_method" value="PUT">
         <div class="row">
             <div class="input-field">
                 <input type="text" id="title" name="title" value="{{story.title}}">
@@ -29,7 +31,7 @@
         </div>
 
         <div class="row">
-            <input type="submit" value="ImPost" class="btn">
+            <input type="submit" value="Update" class="btn">
             <a href="/dashboard" class="btn orange">Cancel</a>
         </div>
     </form>

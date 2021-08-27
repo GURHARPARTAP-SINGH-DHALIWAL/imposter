@@ -58,8 +58,9 @@ router.get('/edit/:id',ensureAuth,async (req,res)=>{
                 });
             }
             else
-            {
-                res.render('stories/index')
+            {  
+                // dont't render because here you dont have the posts
+                res.redirect('/stories')
             }
         }
         else
@@ -75,6 +76,39 @@ router.get('/edit/:id',ensureAuth,async (req,res)=>{
     }
 
 
+});
+
+
+router.put('/:id',ensureAuth,async (req,res)=>{
+  
+    // check if the ifd is valid or not
+    try{
+    const story =await Story.findById(req.params.id).lean();
+
+    if(!story)
+    {
+        return res.render('errors/404');
+    }
+
+    if(story.user==req.user.id)
+    {
+      const newStory=await Story.findOneAndUpdate({_id:req.params.id},req.body,{
+          new:true,
+          runValidators:true
+      });
+      res.redirect('/dashboard');
+    }
+    else
+    {
+        res.redirect('/stories');
+    }
+
+    }catch(err)
+    {
+        console.log(err);
+        res.render('errors/500');
+    }
+   
 });
 
 

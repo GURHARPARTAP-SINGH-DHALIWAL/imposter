@@ -33,9 +33,10 @@ module.exports={
           return ''
         }
       },
-      
+
 //     two select a given value for select tag which is given by selected
       select: function (selected, options) {
+        //   it sets selected on selected parameter out of the given options
         return options
           .fn(this)
           .replace(
