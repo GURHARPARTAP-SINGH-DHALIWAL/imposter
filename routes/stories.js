@@ -1,6 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const Story=require('../models/Story');
+const Comment=require('../models/Comment');
 
 
 const {ensureAuth,ensureGuest}=require('../middleware/auth');
@@ -46,13 +47,21 @@ router.get('/',async (req,res)=>{
 // Go to a songle story page
 router.get('/:id',async (req,res)=>{
     try{
-        const story=await Story.findById(req.params.id).populate('user').lean();
+        const story=await Story.findById(req.params.id).populate('user') .populate({
+            path:'comments',    
+            
+            populate:{
+                path:'user'
+            }
+        }).lean();
+        const comments=story.comments;
         if(!story)
         {
             return res.render('errors/404');
         }
         return res.render('stories/show',{
-            story
+            story,
+            comments
         });
     }catch(err)
     {
@@ -137,9 +146,12 @@ router.put('/:id',ensureAuth,async (req,res)=>{
 
 // handle delte posts
 
-router.delete('/:id',async (req,res)=>{
+router.delete('/:id',ensureAuth,async (req,res)=>{
     try{
+        
+    await Comment.findOneAndRemove({story:req.params.id});
     await Story.remove({_id:req.params.id});
+    
     return res.redirect('/dashboard');
     }catch(err)
     {
@@ -154,7 +166,7 @@ router.delete('/:id',async (req,res)=>{
 // getting all the stories from a user
 
 
-router.get('/user/:id',async (req,res)=>{
+router.get('/user/:id',ensureAuth,async (req,res)=>{
     try{ 
         var new_id=await mongoose.Types.ObjectId(req.params.id);
         console.log(req.params.id);
@@ -165,8 +177,10 @@ router.get('/user/:id',async (req,res)=>{
             .lean();
 
             console.log(stories);
+            const comments=[];
          res.render('stories/index',{
-            stories
+            stories,
+            comments
         });
 
     }catch(err)
@@ -174,6 +188,34 @@ router.get('/user/:id',async (req,res)=>{
         console.log(err);
         res.render('errors/500');
     }
+});
+
+
+// handle comments
+
+router.post('/comments/add/:id',ensureAuth,async (req,res)=>{
+    
+    const story=await Story.findById(req.params.id);
+    const comment=await Comment.create({
+        body:req.body.commentBody,
+        user:req.user.id,
+        story:req.params.id
+    });
+    console.log("neeche hai iske");
+    console.log(comment);
+    await story.comments.push(comment._id);
+    await story.save();
+    // console.log(req.body);
+
+    res.redirect(`/stories/${req.params.id}`)
+
+
+
+
+
+
+
+
 });
 
 module.exports=router;

@@ -78,9 +78,13 @@ app.use(passport.session());
 
 // store req.user in res.locals so as to access it in our template
 
-app.use((req,res,next)=>{
+app.use(async (req,res,next)=>{
   res.locals.user=null;
+    console.log(req.user);
+    console.log(req.user.id);
+ 
   res.locals.user=req.user;
+  
 
   // goto next middleware otherwise it will keep on hangin here
 

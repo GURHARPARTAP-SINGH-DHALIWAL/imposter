@@ -33,7 +33,11 @@
            //replaces textarea
           CKEDITOR.replace('body', {
             plugins: 'wysiwygarea, toolbar, basicstyles, link, image'
+        });
+         CKEDITOR.replace('comment-body', {
+            plugins: 'wysiwygarea, toolbar, basicstyles, link, image'
         })
+        CKEDITOR.config.height = '70px';
         </script>
 
 </body>

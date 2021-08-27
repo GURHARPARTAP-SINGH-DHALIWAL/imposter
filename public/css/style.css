@@ -22,3 +22,10 @@ p{
     float: left;
     margin-right: 10px;
 }
+
+#comment-image{
+    height: 30px !important;
+    width: 30px !important;
+    margin: 10px;
+    
+}

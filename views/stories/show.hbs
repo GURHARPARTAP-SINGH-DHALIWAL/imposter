@@ -1,10 +1,11 @@
 <div class="row">
 {{!-- This view is auto generated lol if you know you know --}}
-    <div class="col s12 m8">
-
+    <div class="col s12 m8 ">
+       <div class="row">
         <h3>{{story.title}}
             <small>{{{editIcon story.user user story._id false}}}</small>
         </h3>
+        {{!-- {{story.comments.user.firstName}} --}}
         <div class="divider"></div>
         <p class="lead" style="font-size: large; font-weight:500;">  <span class="card-title">{{formatDate story.createdAt 'MMMM Do YYYY, h:mm a'}}</span></p>
          <div class="divider" style="margin-bottom: 10px;"></div>
@@ -14,6 +15,32 @@
                 {{{story.body}}}
             </div>
         </div>
+    
+        <form action="/stories/comments/add/{{story._id}}" method="post">
+            <textarea name="commentBody" id="comment-body" cols="30" rows="10"></textarea>
+            <button type="submit" class="btn red right" style="margin-top: 8px;"><i class="fas fa-comments left "></i>Add Comment</button>
+        </form>
+
+        </div>
+       
+        
+        {{#each comments}}
+            <div class="row">
+                    <div class="col s2 ">
+                            <img src="{{user.image}}" referrerpolicy="no-referrer" class="right circle responsive-img img-small" id="comment-image" alt="">
+                    </div>
+
+                <div class="col card story s10" style="padding: 5px;">
+                    <span class="" style="margin-top: 5px;"><b>{{user.displayName}}</b></span>
+                    <div class="divider"></div>
+                    <div class="card-content">
+                        {{stripTags body}}
+                    </div>
+                </div>
+
+            </div>
+        {{/each}}
+        
     </div>
     <div class="col s12 m4">
         <div class="card center-align">
@@ -22,7 +49,7 @@
 
                 <span class="card-title">{{story.user.displayName}}</span>
 
-                <img src="{{story.user.image}}" class="circle responsive-img img-small">
+                <img src="{{story.user.image}}" referrerpolicy="no-referrer" class="circle responsive-img img-small">
             </div>
 
             <div class="card-action">
