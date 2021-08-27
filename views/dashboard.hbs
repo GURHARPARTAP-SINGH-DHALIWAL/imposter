@@ -1,3 +1,39 @@
 <h6 class="white-textw">Dashboard</h6>
 <h1 class="white-texwt" >Hi! {{name}}</h1>
-<p class="white-texwt">Here are your posts</p>
+
+{{#if stories}}
+    <p class="white-texwt">Here are your posts</p>
+    <table class="stripped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Status</th>
+                {{!-- for delete --}}
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+          
+                {{#each stories}}
+
+                        <tr>
+                            {{!-- link to go to the story --}}
+                            <td><a href="/stories/{{_id}}">{{name}}</a></td>
+                            <td>{{createdAt}}</td>
+                            <td><span class="dash-status">{{status}}</span></td>
+                            <td></td>
+                        </tr>
+
+
+                {{/each}}
+            
+        </tbody>
+    </table>
+
+{{else}}
+
+    <p>You don't have any posts yet</p>
+
+{{/if}}

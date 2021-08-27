@@ -7,10 +7,10 @@ const {ensureAuth,ensureGuest}=require('../middleware/auth');
 const mongoose = require('mongoose');
 
 
-router.get('/',ensureGuest,(req,res)=>{
-    res.render('login',{
-        layout:'login'
-    });
+router.get('/add',ensureAuth,(req,res)=>{
+    
+    // it looks in views by default if there is any path mention it
+    res.render('stories/add');
 });
 
 
