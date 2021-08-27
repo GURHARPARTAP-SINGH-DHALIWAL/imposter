@@ -148,8 +148,8 @@ router.put('/:id',ensureAuth,async (req,res)=>{
 
 router.delete('/:id',ensureAuth,async (req,res)=>{
     try{
-        
-    await Comment.findOneAndRemove({story:req.params.id});
+
+    await Comment.deleteMany({story:req.params.id});
     await Story.remove({_id:req.params.id});
     
     return res.redirect('/dashboard');
