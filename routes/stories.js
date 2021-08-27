@@ -42,6 +42,30 @@ router.get('/',async (req,res)=>{
     }
 });
 
+
+// Go to a songle story page
+router.get('/:id',async (req,res)=>{
+    try{
+        const story=await Story.findById(req.params.id).populate('user').lean();
+        if(!story)
+        {
+            return res.render('errors/404');
+        }
+        return res.render('stories/show',{
+            story
+        });
+    }catch(err)
+    {
+        console.log(err);
+        res.render('errors/500');
+    }
+});
+
+
+
+
+
+
 router.get('/edit/:id',ensureAuth,async (req,res)=>{
     try{
         // handlebars cannot process without lean
@@ -111,6 +135,45 @@ router.put('/:id',ensureAuth,async (req,res)=>{
    
 });
 
+// handle delte posts
 
+router.delete('/:id',async (req,res)=>{
+    try{
+    await Story.remove({_id:req.params.id});
+    return res.redirect('/dashboard');
+    }catch(err)
+    {
+        console.log(err);
+        res.render('errors/500');
+    }
+});
+
+
+
+
+// getting all the stories from a user
+
+
+router.get('/user/:id',async (req,res)=>{
+    try{ 
+        var new_id=await mongoose.Types.ObjectId(req.params.id);
+        console.log(req.params.id);
+        const stories=await Story.find(
+            {user:new_id,
+            status:'public'})
+            .populate('user')
+            .lean();
+
+            console.log(stories);
+         res.render('stories/index',{
+            stories
+        });
+
+    }catch(err)
+    {
+        console.log(err);
+        res.render('errors/500');
+    }
+});
 
 module.exports=router;
