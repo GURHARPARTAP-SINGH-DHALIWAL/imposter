@@ -42,6 +42,41 @@ router.get('/',async (req,res)=>{
     }
 });
 
+router.get('/edit/:id',ensureAuth,async (req,res)=>{
+    try{
+        // handlebars cannot process without lean
+        const story=await Story.findOne({_id:req.params.id}).lean();
+        if(story)
+        {    
+            //    rectify this
+
+
+            if(story.user==req.user.id)
+            {
+                res.render('stories/edit',{
+                    story
+                });
+            }
+            else
+            {
+                res.render('stories/index')
+            }
+        }
+        else
+        {
+            res.render('errors/404')
+        }
+    }catch(err)
+    {
+        // one thing to notice is /link will redirect to absolute whule without / will take orefix of current url
+        console.log(err);
+        
+        res.render('errors/500');
+    }
+
+
+});
+
 
 
 module.exports=router;

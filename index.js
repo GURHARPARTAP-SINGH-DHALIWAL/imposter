@@ -9,7 +9,7 @@ const passport=require('passport');
 const session=require('express-session');
 const MongoStore=require('connect-mongo')(session);
 const mongoose =require('mongoose');
-const {formatDate,truncate,stripTags}=require('./helpers/hbs'); //handlebars helper
+const {formatDate,truncate,stripTags,editIcon,select}=require('./helpers/hbs'); //handlebars helper
 
 dotenv.config({path:"./config/config.env"});
 
@@ -40,7 +40,9 @@ if(process.env.NODE_ENV==='development')
 app.engine('.hbs', exphbs({helpers:{
   formatDate,
   truncate,
-  stripTags
+  stripTags,
+  editIcon,
+  select
 }
   ,defaultLayout:'main',extname: '.hbs'}));
 app.set('view engine', '.hbs');
@@ -60,6 +62,17 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+// store req.user in res.locals so as to access it in our template
+
+app.use((req,res,next)=>{
+  res.locals.user=null;
+  res.locals.user=req.user;
+
+  // goto next middleware otherwise it will keep on hangin here
+
+  next();
+});
 
 
 app.use(express.static('public'));
