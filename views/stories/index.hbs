@@ -10,17 +10,19 @@
 
                 <div class="card-content center-align " style="overflow-wrap: break-word;">
                     <h5>{{title}}</h5>
-                    <p>{{body}}</p>
+                    <div class="divider"></div>
+                   
+                    <p>{{stripTags ( truncate body 160 ) }}</p>
                     <br>
                     <div class="chip">
-                        <img src="{{user.image}}" alt="">
+                        <img src="{{user.image}}" referrerpolicy="no-referrer"  alt="">
                         {{!-- give all stories of a particular user --}}
                         <a href="/stories/user/{{user._id}}">{{user.displayName}}</a>
                     </div>
                 </div>
-
+                <div class="divider"></div>
                 <div class="card-action center-align">
-                    <a href="/stories/{{_id}}" class="btn grey">Read More</a>
+                    <a href="/stories/{{_id}}" class="btn black">Read More</a>
                 </div>
             </div>
         </div>

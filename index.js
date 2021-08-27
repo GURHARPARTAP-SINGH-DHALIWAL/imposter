@@ -9,7 +9,7 @@ const passport=require('passport');
 const session=require('express-session');
 const MongoStore=require('connect-mongo')(session);
 const mongoose =require('mongoose');
-const {formatDate}=require('./helpers/hbs'); //handlebars helper
+const {formatDate,truncate,stripTags}=require('./helpers/hbs'); //handlebars helper
 
 dotenv.config({path:"./config/config.env"});
 
@@ -22,7 +22,7 @@ connectDB();
 const app=express();
 
 // to parse the encoded data of the form
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
 // for logging as it will help in debugging 
@@ -38,7 +38,9 @@ if(process.env.NODE_ENV==='development')
 // Whwn we render a file express look for view engine and view set the layout file whihc is by default main in handlebars
 // helpers allow these function to be used in our templates
 app.engine('.hbs', exphbs({helpers:{
-  formatDate
+  formatDate,
+  truncate,
+  stripTags
 }
   ,defaultLayout:'main',extname: '.hbs'}));
 app.set('view engine', '.hbs');
