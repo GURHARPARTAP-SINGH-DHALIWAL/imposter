@@ -21,6 +21,7 @@ router.get('/dashboard',ensureAuth,async (req,res)=>{
     // lean improves performance as it does not links unnecessary mongoose functiions such as sace and other header it is retiurned as plain javasrpit object of data not mongoose document
     try{
     const stories=await Story.find({user:req.user.id}).lean();
+    console.log(stories);
 
     res.render('dashboard',{
         name:req.user.firstName,

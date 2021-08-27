@@ -8,22 +8,30 @@ const mongoose = require('mongoose');
 
 
 router.get('/add',ensureAuth,(req,res)=>{
-    
+
     // it looks in views by default if there is any path mention it
     res.render('stories/add');
 });
 
-
-router.get('/dashboard',ensureAuth,async (req,res)=>{
-    
-
-    // check difference between _id and id  
-    // lean improves performance as it does not links unnecessary mongoose functiions such as sace and other header it is retiurned as plain javasrpit object of data not mongoose document
+router.post('/',async (req,res)=>{
     try{
-    const stories=await Story.find({user:req.user.id}).lean();
+    req.body.user=req.user.id;
+    await Story.create(req.body);
+    res.redirect('/dashboard');
+    }catch(err)
+    {
+        console.log(err);
+        res.render('errors/500');
+    }
+});
+   
 
-    res.render('dashboard',{
-        name:req.user.firstName,
+// give all public pots
+router.get('/',async (req,res)=>{
+    try{
+        // 
+    const stories=await Story.find({status:'public'}).populate('user').sort({createdAt:'desc'}).lean();
+    res.render('stories/index',{
         stories
     });
     }

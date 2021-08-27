@@ -2,8 +2,8 @@
 <h1 class="white-texwt" >Hi! {{name}}</h1>
 
 {{#if stories}}
-    <p class="white-texwt">Here are your posts</p>
-    <table class="stripped">
+    <p class="white-texwt">Here are your ImPosts</p>
+    <table class="striped">
         <thead>
             <tr>
                 <th>Title</th>
@@ -20,8 +20,8 @@
 
                         <tr>
                             {{!-- link to go to the story --}}
-                            <td><a href="/stories/{{_id}}">{{name}}</a></td>
-                            <td>{{createdAt}}</td>
+                            <td><a href="/stories/{{_id}}">{{title}}</a></td>
+                            <td>{{formatDate createdAt 'dddd, MMMM Do YYYY, h:mm:ss a'}}</td>
                             <td><span class="dash-status">{{status}}</span></td>
                             <td></td>
                         </tr>
