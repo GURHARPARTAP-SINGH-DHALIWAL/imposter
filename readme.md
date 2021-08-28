@@ -52,13 +52,13 @@ A social media app for imposters
 
 * Private and public posts.
 
-* Public posts showing all the public posts of all users.
+* Public posts page showing all the public posts of all users.
 
 * Creation, deletion and modification of posts .
 
 * Commenting on posts.
 
-* Creation, deletion and modification of posts.
+* Creation, deletion and modification of comments on a post.
 
 * Viewing all the public posts of a particular user.
 
