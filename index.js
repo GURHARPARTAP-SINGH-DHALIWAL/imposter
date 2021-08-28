@@ -10,7 +10,7 @@ const session=require('express-session');
 const MongoStore=require('connect-mongo')(session);
 const mongoose =require('mongoose');
 const methodOverride=require('method-override');
-const {formatDate,truncate,stripTags,editIcon,select}=require('./helpers/hbs'); //handlebars helper
+const {formatDate,truncate,stripTags,editIcon,select,deleteIcon}=require('./helpers/hbs'); //handlebars helper
 
 dotenv.config({path:"./config/config.env"});
 
@@ -55,7 +55,8 @@ app.engine('.hbs', exphbs({helpers:{
   truncate,
   stripTags,
   editIcon,
-  select
+  select,
+  deleteIcon
 }
   ,defaultLayout:'main',extname: '.hbs'}));
 app.set('view engine', '.hbs');
@@ -80,8 +81,7 @@ app.use(passport.session());
 
 app.use(async (req,res,next)=>{
   res.locals.user=null;
-    console.log(req.user);
-    console.log(req.user.id);
+ 
  
   res.locals.user=req.user;
   

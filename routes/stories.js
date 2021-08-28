@@ -207,15 +207,40 @@ router.post('/comments/add/:id',ensureAuth,async (req,res)=>{
     await story.save();
     // console.log(req.body);
 
-    res.redirect(`/stories/${req.params.id}`)
-
-
-
-
-
-
-
+    res.redirect(`/stories/${req.params.id}`);
 
 });
+
+
+// delte comments
+
+router.get('/comments/delete/:id',async (req,res)=>{
+    try{
+        let comment=await Comment.findById(req.params.id);
+        if(comment&&comment.user==req.user.id)
+        {
+            const PostId=comment.story;
+            await  comment.remove();
+             
+            await  Story.findByIdAndUpdate(PostId,{$pull:{comments:req.params.id}});
+
+            return res.redirect('back');
+            
+           
+
+        }
+        else
+        {   
+            console.log(comment.user,"--",req.user.id);
+            res.render('erros/500');
+        }
+
+    }catch(err)
+    {
+        console.log(err);
+        res.render('errors/500');
+    }
+});
+
 
 module.exports=router;

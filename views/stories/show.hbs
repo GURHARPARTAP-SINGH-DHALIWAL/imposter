@@ -23,7 +23,8 @@
 
         </div>
        
-        <h2>comments</h2>
+        <h2>Comments</h2>
+        <div class="divider"></div>
         {{#each comments}}
             <div class="row">
                     <div class="col s2 ">
@@ -32,6 +33,7 @@
 
                 <div class="col card story s10" style="padding: 5px;">
                     <span class="" style="margin-top: 5px;"><b>{{user.displayName}}</b></span>
+                     <span class="right">{{{deleteIcon user ../user _id}}}</span>
                     <div class="divider"></div>
                     <div class="card-content">
                         {{stripTags body}}

@@ -1,4 +1,5 @@
 const moment=require('moment');
+const Comment = require('../models/Comment');
 module.exports={
     formatDate:function(date,format)
     {
@@ -48,4 +49,14 @@ module.exports={
             ' selected="selected"$&'
           )
       },
+
+      deleteIcon: function (storyUser, loggedUser, comment_id, floating = false) {
+        if (storyUser._id.toString() == loggedUser._id.toString()) {
+         {
+            return `<a href="/stories/comments/delete/${comment_id}"><i class="fas fa-trash"></i></a>`
+          }
+        } else {
+          return ''
+        }
+      }
 }
