@@ -9,17 +9,18 @@ p{
 #card-image{
     height: 200px;
 }
-/* body{
-    background-image: url("https://wallpapercave.com/wp/VD8ldiL.jpg");
-    background-size: cover;
-    
-} */
 body{
-    background-image: url("https://wallpapercave.com/wp/VD8ldiL.jpg");
+    background-image: url("https://images.unsplash.com/photo-1573339607881-208e75e4b267?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZGFyayUyMGZvcmVzdHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80");
     background-size: auto;
     opacity: .9;
     
 }
+/* body{
+    background-image: url("https://wallpapercave.com/wp/VD8ldiL.jpg");
+    background-size: auto;
+    opacity: .9;
+    
+} */
 
 .fa-small{
     font-size: 16px !important;
