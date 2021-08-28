@@ -1,4 +1,4 @@
-# Imposter[http://imposterr.herokuapp.com/]
+# [Imposter](http://imposterr.herokuapp.com/)
 
 A social media app for imposters
 
