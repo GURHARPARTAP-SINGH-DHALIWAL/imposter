@@ -1,7 +1,8 @@
-<form action="/stories/comments/edit/cb/{{comment._id}}" method="post">
+<h2 class="white-text">Update Comment</h2>
+<form style="margin-top: 30px;" action="/stories/comments/edit/cb/{{comment._id}}" method="post">
 
     <input type="hidden" name="_method" value="PUT">
     <textarea name="commentBody" id="updatecomment" cols="30" rows="10">{{comment.body}}</textarea>
-    <button type="submit" class="btn red">Update</button>
+    <button type="submit" class="btn red right" style="margin-top: 10px;">Update</button>
 
 </form>

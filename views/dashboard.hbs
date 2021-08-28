@@ -1,8 +1,8 @@
-<h6 class="white-textw">Dashboard</h6>
-<h1 class="white-texwt" >Hi! {{name}}</h1>
+<h4 class="white-text">Dashboard</h4>
+<h1 class="white-text" >Hi! {{name}}</h1>
 
 {{#if stories}}
-    <p class="white-texwt">Here are your ImPosts</p>
+    <p class="white-text" > <b> Here are your ImPosts </b></p>
     <table class="striped" style="margin-bottom: 50px;">
         <thead>
             <tr>
@@ -20,14 +20,14 @@
 
                         <tr>
                             {{!-- link to go to the story --}}
-                            <td><a href="/stories/{{_id}}">{{title}}</a></td>
-                            <td>{{formatDate createdAt 'dddd, MMMM Do YYYY, h:mm:ss a'}}</td>
+                            <td><a href="/stories/{{_id}}" style="color:rgb(0, 0, 0) ;"><b>{{title}}</b></a></td>
+                            <td>{{formatDate createdAt 'dddd, MMMM Do YYYY, h:mm a'}}</td>
                             <td><span class="dash-status">{{status}}</span></td>
                             <td>
-                                <a href="/stories/edit/{{_id}}" class="btn-btn-float"><i class="fas fa-edit "></i></a>
+                                <a href="/stories/edit/{{_id}}" class="btn btn-float transparent black-text" id="editpost"><i class="fas fa-edit "></i></a>
                                 <form action="/stories/{{_id}}" method="POST">
                                     <input type="hidden" name="_method" value="DELETE">
-                                   <button type="submit" > <i class="fas fa-trash "></i></button>
+                                   <button type="submit" class="btn transparent red-text"> <i class="fas fa-trash "></i></button>
                                 </form>
                             </td>
                         </tr>

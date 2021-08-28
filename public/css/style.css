@@ -10,10 +10,17 @@ p{
     height: 200px;
 }
 /* body{
-    background-image: url("https://woodcomm.ie/wp-content/uploads/2018/10/dark-blue-gradient-background-9562-1024x616.jpg");
+    background-image: url("https://wallpapercave.com/wp/VD8ldiL.jpg");
     background-size: cover;
     
 } */
+body{
+    background-image: url("https://wallpapercave.com/wp/VD8ldiL.jpg");
+    background-size: auto;
+    opacity: .9;
+    
+}
+
 .fa-small{
     font-size: 16px !important;
     background-color: #F44336 !important;
@@ -29,4 +36,12 @@ p{
     width: 30px !important;
     margin: 10px;
     
+}
+tr{
+    background-color: rgba(242,242,242,0.8);
+}
+#edit-add-form{
+    background-color: rgba(242,242,242,0.5) !important;
+    padding: 50px;
+
 }

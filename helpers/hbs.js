@@ -26,7 +26,7 @@ module.exports={
       editIcon: function (storyUser, loggedUser, storyId, floating = true) {
         if (storyUser._id.toString() == loggedUser._id.toString()) {
           if (floating) {
-            return `<a href="/stories/edit/${storyId}" class="btn-floating halfway-fab blue waves-effect"><i class="fas fa-edit fa-small"></i></a>`
+            return `<a href="/stories/edit/${storyId}" class="btn-floating halfway-fab blue waves-effect "><i class="fas fa-edit fa-small"></i></a>`
           } else {
             return `<a href="/stories/edit/${storyId}"><i class="fas fa-edit"></i></a>`
           }
@@ -53,7 +53,7 @@ module.exports={
       deleteIcon: function (storyUser, loggedUser, comment_id, floating = false) {
         if (storyUser._id.toString() == loggedUser._id.toString()) {
          {
-            return `<a href="/stories/comments/delete/${comment_id}"><i class="fas fa-trash"></i></a>`
+            return `<a href="/stories/comments/delete/${comment_id}" class="red-text"><i class="fas fa-trash"></i></a>`
           }
         } else {
           return ''
@@ -63,7 +63,7 @@ module.exports={
       editComment: function (storyUser, loggedUser, comment_id, floating = false) {
         if (storyUser._id.toString() == loggedUser._id.toString()) {
          {
-            return `<a href="/stories/comments/edit/${comment_id}"><i class="fas fa-edit"></i></a>`
+            return `<a href="/stories/comments/edit/${comment_id}" class="black-text darken-5"><i class="fas fa-edit"></i></a>`
           }
         } else {
           return ''

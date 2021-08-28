@@ -2,15 +2,15 @@
 {{!-- This view is auto generated lol if you know you know --}}
     <div class="col s12 m8 ">
        <div class="row">
-        <h3>{{story.title}}
+        <h3  class="white-text">{{story.title}}
             <small>{{{editIcon story.user user story._id false}}}</small>
         </h3>
         {{!-- {{story.comments.user.firstName}} --}}
         <div class="divider"></div>
-        <p class="lead" style="font-size: large; font-weight:500;">  <span class="card-title">{{formatDate story.createdAt 'MMMM Do YYYY, h:mm a'}}</span></p>
+        <p class="lead" class="white-text"  style="font-size: large; font-weight:500;background-color: rgba(242,242,242,0.5);">  <span class="card-title"   >{{formatDate story.createdAt 'MMMM Do YYYY, h:mm a'}}</span></p>
          <div class="divider" style="margin-bottom: 10px;"></div>
-        <div class="card story">
-            <div class="card-content">
+        <div class="card story" style="background-color: rgba(242,242,242,0.5); !important">
+            <div class="card-content " style="font-weight: 600;" >
                
                 {{{story.body}}}
             </div>
@@ -23,7 +23,7 @@
 
         </div>
        
-        <h2>Comments</h2>
+        <h2 class="white-text">Comments</h2>
         <div class="divider"></div>
         {{#each comments}}
             <div class="row">
@@ -31,14 +31,14 @@
                             <img src="{{user.image}}" referrerpolicy="no-referrer" class="right circle responsive-img img-small" id="comment-image" alt="">
                     </div>
 
-                <div class="col card story s10" style="padding: 5px;">
-                    <span class="" style="margin-top: 5px;"><b>{{user.displayName}}</b></span>
+                <div class="col card story s10 " style="padding: 5px; background-color: rgba(242,242,242,0.5);  ">
+                    <span class="" style="margin-top: 5px;" ><b>{{user.displayName}}</b></span>
                     <span class="right">
                     <span class="" style="margin-right: 2px;">{{{editComment user ../user _id}}}</span>
                      <span class="">{{{deleteIcon user ../user _id}}}</span>
                      </span>
                     <div class="divider"></div>
-                    <div class="card-content">
+                    <div class="card-content" style="overflow-wrap: break-word; font-weight:500">
                         {{stripTags body}}
                     </div>
                 </div>
@@ -48,17 +48,17 @@
         
     </div>
     <div class="col s12 m4">
-        <div class="card center-align">
+        <div class="card center-align " style="padding: 5px; background-color: rgba(242,242,242,0.5);  ">
 
-            <div class="card-content">
+            <div class="card-content" >
 
-                <span class="card-title">{{story.user.displayName}}</span>
+                <span class="card-title"><b>{{story.user.displayName}}</b></span>
 
                 <img src="{{story.user.image}}" referrerpolicy="no-referrer" class="circle responsive-img img-small">
             </div>
 
-            <div class="card-action">
-                <a href="/stories/user/{{story.user._id}}">More From {{story.user.firstName}}</a>
+            <div class="card-action" >
+                <a href="/stories/user/{{story.user._id}}" style="color: #079c6b; font-weight:600;">More From {{story.user.firstName}}</a>
             </div>
         </div>
     </div>

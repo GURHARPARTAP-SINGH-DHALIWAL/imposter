@@ -7,12 +7,14 @@ const Comment=require('../models/Comment');
 const {ensureAuth,ensureGuest}=require('../middleware/auth');
 const mongoose = require('mongoose');
 
-
+//Go to add stories page
 router.get('/add',ensureAuth,(req,res)=>{
 
     // it looks in views by default if there is any path mention it
     res.render('stories/add');
 });
+
+// Create story from form
 
 router.post('/',async (req,res)=>{
     try{
@@ -264,7 +266,7 @@ router.put('/comments/edit/cb/:id',ensureAuth,async (req,res)=>{
     try{
 
         const comment=await Comment.findById(req.params.id).lean();
-        console.log(comment);
+        // console.log(comment);
         if(!comment)
         {
             return res.render('errors/404');
