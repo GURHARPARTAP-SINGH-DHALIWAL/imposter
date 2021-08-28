@@ -20,6 +20,10 @@ module.exports={
       },
     //   remove p tagse given by ckeditor some regular expression in don't understand much (actually not at all lol) refer-https://www.geeksforgeeks.org/how-to-strip-out-html-tags-from-a-string-using-javascript/#:~:text=To%20strip%20out%20all%20the,innerText%20property%20from%20HTML%20DOM.
       stripTags: function (input) {
+        
+         input=input.replace(/&nbsp;/g, ' ');
+        
+        
         return input.replace(/<(?:.|\n)*?>/gm, '')
       },
     //   basically put a edit icon on logged in user posts and clicking it obviously redirects to edit handler

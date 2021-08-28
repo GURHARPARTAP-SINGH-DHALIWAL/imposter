@@ -31,17 +31,30 @@
         </script>
         <script>
            //replaces textarea
-          CKEDITOR.replace('body', {
-            plugins: 'wysiwygarea, toolbar, basicstyles, link, image'
-        });
-         CKEDITOR.replace('comment-body', {
-            plugins: 'wysiwygarea, toolbar, basicstyles, link, image'
-        })
-        CKEDITOR.config.height = '70px';
+            CKEDITOR.on('instanceReady', function (ck) {
+            ck.editor.on("change", function (e) {
+                var sel = ck.editor.getSelection();
+                if (sel) {
+                    var selected = sel.getStartElement();
+                    if (selected && selected.$)
+                        sel.getStartElement().$.normalize();
+                }
+            });
+    });
 
-           CKEDITOR.replace('updatecomment', {
-            plugins: 'wysiwygarea, toolbar, basicstyles, link, image'
-        })
+            CKEDITOR.replace('body', {
+                plugins: 'wysiwygarea, toolbar, basicstyles, link, image'
+            });
+            CKEDITOR.replace('comment-body', {
+                plugins: 'wysiwygarea, toolbar, basicstyles, link, image'
+            })
+            CKEDITOR.config.height = '70px';
+
+            CKEDITOR.replace('updatecomment', {
+                plugins: 'wysiwygarea, toolbar, basicstyles, link, image'
+            })
+        
+
         </script>
 
 </body>
