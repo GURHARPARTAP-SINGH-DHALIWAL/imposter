@@ -16,9 +16,9 @@
             </div>
         </div>
     
-        <form action="/stories/comments/add/{{story._id}}" method="post">
-            <textarea name="commentBody" id="comment-body" cols="30" rows="10"></textarea>
-            <button type="submit" class="btn red right" style="margin-top: 8px;"><i class="fas fa-comments left "></i>Add Comment</button>
+        <form action="/stories/comments/add/{{story._id}}" method="post" id="comment-form">
+            <textarea name="commentBody" id="commentbody" cols="30" rows="10"></textarea>
+            <button type="submit" class="btn red right" style="margin-top: 8px;" id="comment-button"><i class="fas fa-comments left "></i>Add Comment</button>
         </form>
 
         </div>
