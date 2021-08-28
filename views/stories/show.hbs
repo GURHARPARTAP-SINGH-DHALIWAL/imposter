@@ -33,7 +33,10 @@
 
                 <div class="col card story s10" style="padding: 5px;">
                     <span class="" style="margin-top: 5px;"><b>{{user.displayName}}</b></span>
-                     <span class="right">{{{deleteIcon user ../user _id}}}</span>
+                    <span class="right">
+                    <span class="" style="margin-right: 2px;">{{{editComment user ../user _id}}}</span>
+                     <span class="">{{{deleteIcon user ../user _id}}}</span>
+                     </span>
                     <div class="divider"></div>
                     <div class="card-content">
                         {{stripTags body}}

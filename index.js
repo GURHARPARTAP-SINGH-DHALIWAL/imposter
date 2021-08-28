@@ -10,7 +10,7 @@ const session=require('express-session');
 const MongoStore=require('connect-mongo')(session);
 const mongoose =require('mongoose');
 const methodOverride=require('method-override');
-const {formatDate,truncate,stripTags,editIcon,select,deleteIcon}=require('./helpers/hbs'); //handlebars helper
+const {formatDate,truncate,stripTags,editIcon,select,deleteIcon,editComment}=require('./helpers/hbs'); //handlebars helper
 
 dotenv.config({path:"./config/config.env"});
 
@@ -56,7 +56,8 @@ app.engine('.hbs', exphbs({helpers:{
   stripTags,
   editIcon,
   select,
-  deleteIcon
+  deleteIcon,
+  editComment
 }
   ,defaultLayout:'main',extname: '.hbs'}));
 app.set('view engine', '.hbs');

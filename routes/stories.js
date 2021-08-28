@@ -214,7 +214,7 @@ router.post('/comments/add/:id',ensureAuth,async (req,res)=>{
 
 // delte comments
 
-router.get('/comments/delete/:id',async (req,res)=>{
+router.get('/comments/delete/:id',ensureAuth,async (req,res)=>{
     try{
         let comment=await Comment.findById(req.params.id);
         if(comment&&comment.user==req.user.id)
@@ -231,7 +231,7 @@ router.get('/comments/delete/:id',async (req,res)=>{
         }
         else
         {   
-            console.log(comment.user,"--",req.user.id);
+            // console.log(comment.user,"--",req.user.id);
             res.render('erros/500');
         }
 
@@ -242,5 +242,60 @@ router.get('/comments/delete/:id',async (req,res)=>{
     }
 });
 
+// edit comment
+
+router.get('/comments/edit/:id',ensureAuth,async (req,res)=>{
+    try{
+    const comment=await Comment.findById(req.params.id).lean();
+    res.render('stories/editComment',{
+        comment
+    });
+    }catch(err)
+    {
+        console.log(err);
+        res.render('errors/500');
+    }
+    
+});
+
+// edit comment callback
+
+router.put('/comments/edit/cb/:id',ensureAuth,async (req,res)=>{
+    try{
+
+        const comment=await Comment.findById(req.params.id).lean();
+        console.log(comment);
+        if(!comment)
+        {
+            return res.render('errors/404');
+        }
+        if(comment.user==req.user.id)
+        {    
+            const storyId=comment.story;
+            const newComment=await Comment.findOneAndUpdate({_id:req.params.id},{
+                body:req.body.commentBody,
+                user:req.user.id,
+                story:storyId
+            },{
+                new:true,
+                runValidators:true
+            });
+            
+            return res.redirect(`/stories/${comment.story}`);
+        }
+        else
+        {   
+
+            return res.render('errors/500');
+        }
+
+
+    }catch(err)
+    {
+        console.log(err);
+        res.render('errors/500');
+    }   
+
+});
 
 module.exports=router;

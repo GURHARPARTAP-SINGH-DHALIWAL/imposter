@@ -58,5 +58,15 @@ module.exports={
         } else {
           return ''
         }
+      },
+
+      editComment: function (storyUser, loggedUser, comment_id, floating = false) {
+        if (storyUser._id.toString() == loggedUser._id.toString()) {
+         {
+            return `<a href="/stories/comments/edit/${comment_id}"><i class="fas fa-edit"></i></a>`
+          }
+        } else {
+          return ''
+        }
       }
 }
